@@ -1,10 +1,10 @@
-import 'package:bmi/constant/App_constant.dart';
-import 'package:bmi/widget/left_bar.dart';
+
 import 'package:bmi/widget/right_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:bmi/widget/left_bar.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -13,22 +13,23 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController _heightController = TextEditingController();
   TextEditingController _wightController = TextEditingController();
-  double _emailResult =0;
+  double _bmiResult = 0;
   String _textResult = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(
           "BMI Calculater",
-          style: TextStyle(color: accentHexColor,fontWeight: FontWeight.w300),
+          style: TextStyle(color: Colors.white , fontWeight: FontWeight.w300),
 
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
       ),
-      backgroundColor: mainHexColor,
+      backgroundColor: Colors.blue,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -43,7 +44,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: TextStyle(
                         fontSize: 42,
                         fontWeight: FontWeight.w300,
-                        color: accentHexColor
+                        color: Colors. white,
 
                     ),
                     keyboardType: TextInputType.number,
@@ -53,7 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       helperStyle: TextStyle(
                           fontSize: 42,
                           fontWeight: FontWeight.w300,
-                          color: Colors.white.withOpacity(.0)
+                          color: Colors.white.withOpacity(.8)
                       ),
                     ),
                   ),
@@ -62,10 +63,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: 130,
                   child: TextField(
                     controller: _wightController,
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 42,
                         fontWeight: FontWeight.w300,
-                        color: accentHexColor
+                        color: Colors .white ,
 
                     ),
                     keyboardType: TextInputType.number,
@@ -75,42 +77,46 @@ class _HomeScreenState extends State<HomeScreen> {
                       helperStyle: TextStyle(
                           fontSize: 42,
                           fontWeight: FontWeight.w300,
-                          color: Colors.white.withOpacity(.0)
+                          color: Colors.white.withOpacity(.8)
                       ),
                     ),
                   ),
                 )
               ],
             ),
-            SizedBox(height: 30,),
+            SizedBox(height: 50,),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 double _h = double.parse(_heightController.text);
                 double _w = double.parse(_wightController.text);
                 setState(() {
-                  _emailResult = _w / (_h * _h);
-                  if(_emailResult > 25){
+                  _bmiResult = _w / (_h * _h);
+                  if (_bmiResult > 25) {
                     _textResult = "you\'re over weight";
-
-                  }else if (_emailResult >= 18.5 && _emailResult <= 25){
+                  } else if (_bmiResult >= 18.5 && _bmiResult <= 25) {
                     _textResult = "you have normal wight";
-
-                  } else{
+                  } else {
                     _textResult = "you\'re under wight";
-
                   }
                 });
               },
-            ),
-            Container(
-              child: Text('Calculater',style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold,color: accentHexColor),),
 
             ),
             SizedBox(height: 50,),
             Container(
-              child: Text(_emailResult.toStringAsFixed(2), style: TextStyle(fontSize: 90,fontWeight: FontWeight.bold, color: accentHexColor) ,),
+              child: Text('Calculater', style: TextStyle(fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white ),),
+
             ),
-            SizedBox(height: 30,),
+            SizedBox(height: 70,),
+            Container(
+              child: Text(_bmiResult.toStringAsFixed(2), style: TextStyle(
+                  fontSize: 90,
+                  fontWeight: FontWeight.bold,
+                  color: Colors .white ),),
+            ),
+            SizedBox(height: 50,),
 
             Visibility(
               visible: _textResult.isNotEmpty,
@@ -120,17 +126,25 @@ class _HomeScreenState extends State<HomeScreen> {
                   style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.w400,
-                      color: accentHexColor) ,
+                      color: Colors.white ),
                 ),
-              ), ),
-            SizedBox(height: 10,),
-            SizedBox(height: 20,),
+              )),
 
-            SizedBox(height: 20,),
+               SizedBox(height: 30,),
+               Leftbar(barwidth: 40),
+            SizedBox(height: 30,),
+            Leftbar(barwidth:  70,),
+            SizedBox(height: 30,),
+            Leftbar(barwidth: 40),
+            SizedBox(height: 30,),
+            Rightbar(barwidth: 70,),
+            SizedBox(height: 30,),
+            Rightbar(barwidth: 70,),
 
           ],
         ),
-      ),
+      )
     );
   }
 }
+

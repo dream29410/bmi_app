@@ -16,10 +16,10 @@ class Leftbar extends StatelessWidget {
           width: barwidth,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
+                topLeft: Radius.circular(50),
                 bottomLeft: Radius.circular(20),
               ),
-              color: accentHexColor),
+              color: Colors.purple),
         ),
       ],
     );
